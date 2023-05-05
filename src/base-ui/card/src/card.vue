@@ -1,6 +1,6 @@
 <template>
   <div class="list-container" v-for="item in props.list" :key="item.id" style="width: 340px">
-    <router-link :to="`/main/articleDetail/${item.id}`" style="height: 100%; width: 100%">
+    <router-link :to="`/articleDetail/${item.id}`" style="height: 100%; width: 100%">
       <a-card hoverable class="item-container">
         <template #cover>
           <img alt="example" :src="item.image" style="height: 200px; padding: 20px" />
@@ -25,17 +25,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-// import { useInfoStore } from '@/store/modules/info'
-// import { useRouter } from 'vue-router'
-
 const props = defineProps<{ list: any }>()
-// const router = useRouter()
 const ellipsis = ref(true)
-// const gotoArticle = (id:string) => {
-//   // console.log(id)
-//   // store.dispatch('info/getCurrentArticleByIdAction', { id })
-//   router.push({ path: '/main/articleDetail/' + id })
-// }
+
 </script>
 
 <style scoped>

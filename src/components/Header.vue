@@ -8,7 +8,7 @@ import Icon, {
 import { ref } from 'vue'
 import Todos from './Todos.vue'
 // const props = defineProps<{ msg: string }>()
-const emit = defineEmits<{ (e: 'FoldChange', id: boolean): void }>()
+const emit: any = defineEmits<{ (ifFold: boolean): void }>()
 const onBreakpoint = (broken: boolean) => {
   const menubtn = document.querySelector('.menu-btn')
   const nav = document.querySelector('.navContainer')

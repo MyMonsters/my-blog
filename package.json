@@ -11,15 +11,18 @@
   "dependencies": {
     "ant-design-vue": "^3.2.20",
     "axios": "^1.4.0",
-    "md-editor-v3": "^3.0.0",
+    "md-editor-v3": "^1.11.3",
     "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.35",
     "pinia-plugin-persistedstate": "^3.1.0",
     "vue": "^3.2.47",
     "vue-router": "4.1.6"
   },
   "devDependencies": {
+    "@types/marked": "^4.3.0",
     "@types/node": "^18.16.3",
+    "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "@vitejs/plugin-vue": "^4.1.0",

@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 // import { setupPageGuard } from './permission';
-
+import NProgress from 'nprogress'
 const routes: RouteRecordRaw[] = [
   {
     path: '/404',
@@ -24,6 +24,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/main/home'
+  },
+  {
+    path: '/articleDetail/:id',
+    component: () => {
+      return import('../views/Info/ArticleDetail.vue')
+    }
   },
   {
     path: '/main',
@@ -57,12 +63,6 @@ const routes: RouteRecordRaw[] = [
       },
 
       {
-        path: 'articleDetail/:id',
-        component: () => {
-          return import('../views/Info/ArticleDetail.vue')
-        }
-      },
-      {
         path: 'timeline',
         component: () => {
           return import('../views/Info/Timeline.vue')
@@ -81,3 +81,13 @@ export async function setupRouter(app: App) {
   app.use(router)
   await router.isReady()
 }
+// 页面路由刚开始切换的时候
+router.beforeEach((to, from, next) => {
+  console.log(to, from)
+  NProgress.start()
+  next()
+})
+
+router.afterEach(() => {
+  NProgress.done()
+})

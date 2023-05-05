@@ -24,7 +24,7 @@ const infoStore = useInfoStore()
 getTodoList().then((res) => {
   infoStore.setTodolist(res.data)
 })
-const todoList = computed(() => infoStore.todolist)
+const todoList: any = computed(() => infoStore.todolist)
 </script>
 
 <style scoped>
