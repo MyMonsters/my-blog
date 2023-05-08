@@ -1,8 +1,10 @@
 import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import localCache from '@/utils/cache'
 // import { setupPageGuard } from './permission';
 import NProgress from 'nprogress'
+import login from '@/views/login/Login.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/404',
@@ -67,6 +69,66 @@ const routes: RouteRecordRaw[] = [
         component: () => {
           return import('../views/Info/Timeline.vue')
         }
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: login
+  },
+  {
+    path: '/authMain',
+    component: () => {
+      return import('@/views/Manage/AuthMain.vue')
+    },
+    beforeEnter: () => {
+      if (!localCache.getCache('token')) {
+        router.push('/login')
+      }
+    },
+    children: [
+      {
+        path: 'operateContent',
+        component: () => {
+          return import('../views/Manage/operateContent.vue')
+        },
+        children: [
+          {
+            path: '',
+            redirect: '/authMain/operateContent/article'
+          },
+          {
+            name: 'article',
+            path: 'article/:id?',
+            component: () => {
+              return import('../views/Manage/operateArticle.vue')
+            }
+          },
+          {
+            path: 'todo',
+            component: () => {
+              return import('../views/Manage/operateTodos.vue')
+            }
+          },
+          {
+            path: 'project',
+            component: () => {
+              return import('../views/Manage/operateProject.vue')
+            }
+          },
+          {
+            path: 'editArticle/:id?',
+            component: () => {
+              return import('../views/Manage/EditArticle.vue')
+            }
+          },
+          {
+            path: 'timeline',
+            component: () => {
+              return import('../views/Manage/operateTimeline.vue')
+            }
+          }
+        ]
       }
     ]
   }
