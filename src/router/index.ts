@@ -74,7 +74,12 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/login',
-    component: login
+    component: login,
+    beforeEnter: () => {
+      if (localCache.getCache('token')) {
+        router.push('/authMain')
+      }
+    }
   },
   {
     path: '/authMain',
@@ -110,12 +115,12 @@ const routes: RouteRecordRaw[] = [
               return import('../views/Manage/operateTodos.vue')
             }
           },
-          {
-            path: 'project',
-            component: () => {
-              return import('../views/Manage/operateProject.vue')
-            }
-          },
+          // {
+          //   path: 'project',
+          //   component: () => {
+          //     return import('../views/Manage/operateProject.vue')
+          //   }
+          // },
           {
             path: 'editArticle/:id?',
             component: () => {
