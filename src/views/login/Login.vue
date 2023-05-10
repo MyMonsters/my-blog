@@ -6,22 +6,18 @@
 <script lang="ts" setup>
 import loginPanel from './cpns/login-panel.vue'
 import localCache from '@/utils/cache'
-import request from '@/request'
 import { useRouter } from 'vue-router'
+import { testToken } from '@/api/info/api'
 const router = useRouter()
 if (localCache.getCache('token') !== undefined && localCache.getCache('token') !== null) {
-  request
-    .get('/auth/testToken', {
-      headers: { Authorization: ` ${localCache.getCache('token')}` }
-    })
-    .then((response) => {
-      console.log(response)
-      if (response.status === 0) {
-        router.push('/authmain/operateContent')
-      } else {
-        localCache.deleteCache('token')
-      }
-    })
+  testToken().then((response) => {
+    console.log(response)
+    if (response.status === 0) {
+      router.push('/authmain/operateContent')
+    } else {
+      localCache.deleteCache('token')
+    }
+  })
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

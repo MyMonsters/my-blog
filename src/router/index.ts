@@ -3,8 +3,10 @@ import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import localCache from '@/utils/cache'
 // import { setupPageGuard } from './permission';
+
 import NProgress from 'nprogress'
 import login from '@/views/login/Login.vue'
+import { testToken } from '@/api/info/api'
 const routes: RouteRecordRaw[] = [
   {
     path: '/404',
@@ -76,8 +78,15 @@ const routes: RouteRecordRaw[] = [
     path: '/login',
     component: login,
     beforeEnter: () => {
-      if (localCache.getCache('token')) {
-        router.push('/authMain')
+      const token = localCache.getCache('token')
+      if (token !== undefined && token !== null) {
+        testToken().then((response: { status: number }) => {
+          if (response.status === 0) {
+            router.push('/authmain/operateContent')
+          } else {
+            localCache.deleteCache('token')
+          }
+        })
       }
     }
   },

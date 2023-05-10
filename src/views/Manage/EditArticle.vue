@@ -55,8 +55,6 @@ import { useRoute, useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
-// import Preview from '@/components/Preview.vue'
-// import Editor from '@/components/Editor.vue'
 import { useInfoStore } from '@/store/modules/info'
 import { addArticle, updateArticle, updateImg } from '@/api/auth/api'
 import { getAllArticles } from '@/api/info/api'
@@ -67,17 +65,21 @@ const route = useRoute()
 const router = useRouter()
 const id: any = ref(route.params.id)
 console.log(id, articles)
-const currentArticle = articles.value.find((item: any) => {
-  return item.id == id.value
-}) || {
-  content: '',
-  title: '',
-  category: '',
-  type: 1,
-  description: '',
-  image: ''
-}
 const isEdit = id.value ? true : false
+const currentArticle: any = isEdit
+  ? ref(
+      articles.value.find((item: any) => {
+        return item.id == id.value
+      })
+    )
+  : ref({
+      content: '',
+      title: '',
+      category: '',
+      type: 1,
+      description: '',
+      image: ''
+    })
 
 const fileList: any = ref([])
 if (isEdit) {
@@ -91,10 +93,10 @@ const state = reactive({
 })
 const save = () => {
   console.log(currentArticle)
-  currentArticle.type = 1
+  currentArticle.value.type = 1
   const formData = new FormData()
   if (isEdit) {
-    updateArticle(currentArticle).then((response) => {
+    updateArticle(currentArticle.value).then((response) => {
       console.log(response)
       if (response.status === 0) {
         message.success('保存成功啦！')
@@ -119,7 +121,7 @@ const save = () => {
     }
   } else {
     if (fileList.value.length !== 0) {
-      addArticle(currentArticle).then((response) => {
+      addArticle(currentArticle.value).then((response) => {
         // console.log(response)
         // if(response.data.code === 200) visible.value =true
         console.log(response)
