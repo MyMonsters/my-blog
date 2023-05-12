@@ -38,7 +38,11 @@
 
           <!-- <Editor :previewOnly="previewOnly" :content="recordDetail.content" /> -->
         </div>
-        <div>评论区</div>
+        <div>
+          评论区
+          <Editor />
+          <Comments />
+        </div>
       </a-card>
       <a-affix :offset-top="0" class="w-1/4">
         <a-card hoverable>
@@ -54,6 +58,8 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { reactive } from 'vue'
 import MdEditor from 'md-editor-v3'
+import Editor from '@/components/Editor.vue'
+import Comments from './components/comments.vue'
 import 'md-editor-v3/lib/style.css'
 import { useInfoStore } from '@/store/modules/info'
 import { router } from '@/router'

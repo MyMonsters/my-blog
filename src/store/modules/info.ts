@@ -8,7 +8,9 @@ export const useInfoStore = defineStore('infoState', {
     todolist: [],
     currentArticle: {},
     currentEditArticle: {},
-    articles: []
+    articles: [],
+    comments: [],
+    currentCommentId: -1
   }),
   getters: {},
   // 可以同步 也可以异步
@@ -28,6 +30,12 @@ export const useInfoStore = defineStore('infoState', {
     },
     setArticles(articles: any) {
       this.articles = articles
+    },
+    setComments(comments: any) {
+      this.comments = comments
+    },
+    setCurrentCommentId(id: any) {
+      this.currentCommentId = id
     }
   },
 

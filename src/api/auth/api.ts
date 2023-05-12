@@ -64,3 +64,14 @@ export function addTimelineAPI(info: {
     headers: { Authorization: ` ${token}` }
   })
 }
+export function addComment(comment: {
+  content: string
+  nickname: string
+  website: string
+  email: string
+  parent_id: number
+}) {
+  return request.post('/auth/addComment', qs.stringify(comment), {
+    headers: { Authorization: ` ${token}` }
+  })
+}

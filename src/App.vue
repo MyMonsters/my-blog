@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div><router-view></router-view></div>
+  <div class="min-h-700"><router-view></router-view></div>
   <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
 

@@ -17,3 +17,12 @@ interface Todo {
   isdone: number
   title: string
 }
+interface Comment {
+  id: number
+  content: string
+  nickname: string
+  website: string
+  parent_id: number
+  iscomment: boolean
+  replyto: string
+}
