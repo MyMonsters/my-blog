@@ -34,14 +34,25 @@
 
 <script lang="ts" setup>
 import { ref, Ref } from 'vue'
-import type { UploadProps } from 'ant-design-vue'
+import { message, UploadProps } from 'ant-design-vue'
 import { addComment, updateImg } from '@/api/auth/api'
 import { getComment } from '@/api/info/api'
 import { useInfoStore } from '@/store/modules/info'
-const props = defineProps({ parent_id: Number, parent_name: String })
+const props = defineProps({ parent_id: Number, parent_name: String, article_id: Number })
 const parent_id: Ref<number | undefined> = ref(props.parent_id)
+const parent_name: Ref<string | undefined> = ref(props.parent_name)
+const article_id: Ref<number | undefined> = ref(props.article_id)
 const fileList: any = ref<UploadProps['fileList']>([])
-const comment = ref({ content: '', website: '', email: '', nickname: '', parent_id: -1 })
+const infoStore = useInfoStore()
+const comment = ref({
+  content: '',
+  website: '',
+  email: '',
+  nickname: '',
+  parent_id: -1,
+  replyto: '',
+  article_id
+})
 const handleUpload = (file: any) => {
   console.log(file)
   const formData = new FormData()
@@ -50,10 +61,22 @@ const handleUpload = (file: any) => {
 }
 const handleSendComment = () => {
   if (parent_id.value) comment.value.parent_id = parent_id.value
+  if (parent_name.value) comment.value.replyto = parent_name.value
   addComment(comment.value).then((res) => {
     if (res.status === 0) {
+      infoStore.setCurrentCommentId(-1)
       getComment().then((res) => {
-        alert('fasong')
+        message.info('发送成功！')
+        comment.value = {
+          content: '',
+          website: '',
+          email: '',
+          nickname: '',
+          parent_id: -1,
+          replyto: '',
+          article_id: article_id.value
+        }
+
         useInfoStore().setComments(res.data)
       })
     }

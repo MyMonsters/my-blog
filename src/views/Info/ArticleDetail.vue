@@ -40,8 +40,8 @@
         </div>
         <div>
           评论区
-          <Editor />
-          <Comments />
+          <Editor :article_id="recordDetail.id" />
+          <Comments :article_id="recordDetail.id" />
         </div>
       </a-card>
       <a-affix :offset-top="0" class="w-1/4">

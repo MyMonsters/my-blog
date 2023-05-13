@@ -1,7 +1,7 @@
 import request from '@/request'
 import qs from 'qs'
 import localCache from '@/utils/cache'
-import { message } from 'ant-design-vue'
+
 const token = localCache.getCache('token')
 //操作article
 export function accountLoginAPI(account: Account): Promise<LoginAPIRes> {
@@ -71,7 +71,7 @@ export function addComment(comment: {
   email: string
   parent_id: number
 }) {
-  return request.post('/auth/addComment', qs.stringify(comment), {
+  return request.post('/record/addComment', qs.stringify(comment), {
     headers: { Authorization: ` ${token}` }
   })
 }

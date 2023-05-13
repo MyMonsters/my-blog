@@ -25,4 +25,6 @@ interface Comment {
   parent_id: number
   iscomment: boolean
   replyto: string
+  create_time: string
+  article_id: number
 }

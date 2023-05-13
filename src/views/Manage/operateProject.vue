@@ -1,18 +1,11 @@
 <template>
-	<div class="operateProject">operatePRoject</div>
+  <div class="operateProject">operatePRoject</div>
 </template>
 
-<script>
-export default {
-	name: 'ProjectName',
-	setup() {
-		return {}
-	}
-}
-</script>
+<script lang="ts" setup></script>
 
 <style scoped>
 .operateProject {
-	min-height: 500px;
+  min-height: 500px;
 }
 </style>

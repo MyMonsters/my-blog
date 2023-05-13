@@ -1,7 +1,6 @@
 import { accountLoginAPI } from '@/api/auth/api'
 import { defineStore } from 'pinia'
 import localCache from '@/utils/cache'
-import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 import { router } from '@/router'
 
