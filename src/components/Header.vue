@@ -3,10 +3,12 @@ import Icon, {
   HomeTwoTone,
   SmileTwoTone,
   InfoCircleTwoTone,
-  CodeTwoTone
+  CodeTwoTone,
+  DownOutlined
 } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import Todos from './Todos.vue'
+
 // const props = defineProps<{ msg: string }>()
 const emit: any = defineEmits<{ (ifFold: boolean): void }>()
 const onBreakpoint = (broken: boolean) => {
@@ -93,11 +95,26 @@ const onClose = () => {
             <code-two-tone /><span style="margin-left: 4px">PROJECTS</span>
           </div>
         </router-link>
-        <router-link to="/main/article">
-          <div class="header-item">
-            <smile-two-tone /><span style="margin-left: 4px">ARTICLE</span>
-          </div>
-        </router-link>
+
+        <a>
+          <a-dropdown>
+            <div class="header-item">
+              <smile-two-tone /><span style="margin-left: 4px">ARTICLE</span>
+              <DownOutlined />
+            </div>
+            <template #overlay
+              ><a-menu>
+                <a-menu-item key="0">
+                  <router-link to="/main/article">Articles</router-link>
+                </a-menu-item>
+                <a-menu-item key="1">
+                  <router-link to="/main/label">Tags</router-link>
+                </a-menu-item>
+                <a-menu-divider /> </a-menu
+            ></template>
+          </a-dropdown>
+        </a>
+
         <router-link to="/main/timeline">
           <div class="header-item">
             <info-circle-two-tone /><span style="margin-left: 4px">TIMELINE</span>

@@ -1,13 +1,19 @@
 <template>
-  <div class="list-container" v-for="item in props.list" :key="item.id" style="width: 340px">
-    <router-link :to="`/articleDetail/${item.id}`" style="height: 100%; width: 100%">
+  <div
+    class="list-container"
+    v-for="item in props.list"
+    :key="item.id"
+    style="height: 400px; width: 340px"
+  >
+    <router-link :to="`/articleDetail/${item.id}`" style="width: 100%">
       <a-card hoverable class="item-container">
         <template #cover>
           <img alt="example" :src="item.image" style="height: 200px; padding: 20px" />
         </template>
         <div class="tag-container">
-          <a-tag color="green">{{ item.time }}</a-tag>
-          <a-tag color="green">{{ item.category }}</a-tag>
+          <div v-for="labelItem in item.label ? item.label.split(',') : []" :key="labelItem">
+            <a-tag color="green"><tag-outlined class="mr-2" />{{ labelItem }}</a-tag>
+          </div>
         </div>
         <a-tooltip color="#44BBA3" placement="rightBottom">
           <template #title>{{ item.title }}</template>
@@ -25,9 +31,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { TagOutlined } from '@ant-design/icons-vue'
 const props = defineProps<{ list: any }>()
 const ellipsis = ref(true)
-
+console.log(props.list[0] ? props.list[0].label.split(',') : [])
 </script>
 
 <style scoped>
@@ -36,6 +43,7 @@ const ellipsis = ref(true)
   background-color: transparent;
   border-radius: 20px;
   height: 100%;
+  min-height: 400px;
   width: 100%;
   align-content: space-around;
 }

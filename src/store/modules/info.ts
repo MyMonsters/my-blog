@@ -10,9 +10,18 @@ export const useInfoStore = defineStore('infoState', {
     currentEditArticle: {},
     articles: [],
     comments: [],
-    currentCommentId: -1
+    currentCommentId: -1,
+    labels: [],
+    currentLabelID: -1
   }),
-  getters: {},
+  getters: {
+    getArticleById: (state) => {
+      return (id: number) =>
+        state.articles.find((item: Article) => {
+          return item.id === id
+        })
+    }
+  },
   // 可以同步 也可以异步
   actions: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,6 +45,12 @@ export const useInfoStore = defineStore('infoState', {
     },
     setCurrentCommentId(id: any) {
       this.currentCommentId = id
+    },
+    setLabel(labels: any) {
+      this.labels = labels
+    },
+    setCurrentLabelID(label_id: any) {
+      this.currentLabelID = label_id
     }
   },
 

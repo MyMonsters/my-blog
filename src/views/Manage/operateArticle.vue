@@ -22,7 +22,7 @@
 
           <a-list-item-meta>
             <template #title>
-              <router-link :to="`/main/articleDetail/${item.id}`">{{ item.title }}</router-link>
+              {{ item.title }}
               <!-- <div @click="gotoEditArticle(item.id)">{{ item.title }}</div> -->
               <!-- <a @click="toRecord"></a> -->
             </template>
@@ -46,7 +46,10 @@
           </div>
           <div class="text-left">
             <a-tag color="#87d068">{{ item.time }}</a-tag>
-            <a-tag color="#87d068">{{ item.category }}</a-tag>
+
+            <span v-for="labelItem in item.label ? item.label.split(',') : []" :key="labelItem">
+              <a-tag color="green"><tag-outlined class="mr-2" />{{ labelItem }}</a-tag>
+            </span>
           </div>
         </a-list-item>
       </template>
@@ -61,6 +64,7 @@ import { useInfoStore } from '@/store/modules/info'
 import { message } from 'ant-design-vue'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { TagOutlined } from '@ant-design/icons-vue'
 // import { message } from 'ant-design-vue'
 // import service from '@/service'
 
@@ -82,7 +86,7 @@ const pagination = {
   },
   pageSize: 6
 }
-const editRecord = (id: string) => {
+const editRecord = (id: number) => {
   router.push({ path: '/authMain/operateContent/editArticle/' + id })
 }
 

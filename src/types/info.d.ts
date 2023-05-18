@@ -5,6 +5,7 @@ interface Timeline {
   color: string
 }
 interface Article {
+  id: number
   content: string
   title: string
   category: string
@@ -27,4 +28,8 @@ interface Comment {
   replyto: string
   create_time: string
   article_id: number
+}
+interface Label {
+  label_id: number
+  label_name: string
 }

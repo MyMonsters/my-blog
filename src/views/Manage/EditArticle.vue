@@ -2,22 +2,68 @@
   <div>
     <a-page-header style="border: 1px solid rgb(235, 237, 240)" title="返回" @back="backClick">
       <template #extra>
-        <a-select ref="select" v-model:value="currentArticle.category" style="width: 120px">
-          <a-select-option value="生活记录">生活记录</a-select-option>
-          <a-select-option value="学习记录">学习记录</a-select-option>
-        </a-select>
+        <div class="relative w-60">
+          <template
+            v-for="tag in currentArticle.label ? currentArticle.label.split(',') : []"
+            :key="tag"
+          >
+            <a-tooltip v-if="tag.length > 20" :title="tag">
+              <a-tag @close="handleClose(tag)">
+                {{ `${tag.slice(0, 20)}...` }}
+              </a-tag>
+            </a-tooltip>
+            <a-tag v-else :closable="true" @close="handleClose(tag)">
+              {{ tag }}
+            </a-tag>
+          </template>
+          <a-tag style="background: #fff; border-style: dashed" @click="showInput">
+            <plus-outlined />
+            New Tag
+          </a-tag>
+          <div class="absolute h-40 w-60 top-8 z-10 overflow-y-scroll left-0" v-show="TagsVisible">
+            <div class="bg-white shadow-md">
+              <p>标签</p>
+              <a-input
+                ref="inputRef"
+                v-model:value="inputValue"
+                type="text"
+                size="small"
+                :style="{ width: '90%' }"
+                @keyup.enter="handleInputConfirm"
+              />
+              <div class="flex flex-wrap justify-start ml-4">
+                <span
+                  class="m-1 bg-amber-100 text-amber-600 p-1"
+                  v-for="item in labels"
+                  v-show="currentArticle.label.indexOf(item.label_name) === -1"
+                  :key="item.label_id"
+                  @click="handleLabelsConfirm(item.label_name)"
+                >
+                  {{ item.label_name }}
+                </span>
+              </div>
+            </div>
+            <CloseOutlined
+              class="absolute closebtn p-1 right-4 top-1"
+              @click="TagsVisible = !TagsVisible"
+            />
+          </div>
+        </div>
 
-        <a-upload
-          v-model:file-list="fileList"
-          list-type="picture"
-          class="upload-list-inline"
-          :before-upload="beforeUpload"
-        >
-          <a-button>
-            <upload-outlined></upload-outlined>
-            Select File
-          </a-button>
-        </a-upload>
+        <div class="mt-2">
+          <a-upload
+            v-model:file-list="fileList"
+            list-type="picture"
+            class="upload-list-inline"
+            :before-upload="beforeUpload"
+          >
+            <a-button>
+              <upload-outlined></upload-outlined>
+              Select File
+            </a-button>
+          </a-upload>
+        </div>
+
         <div class="img-container" v-if="isEdit">
           <img :src="currentArticle.image" alt="" style="height: 100%" />
         </div>
@@ -49,38 +95,33 @@
 </template>
 
 <script lang="ts" setup>
-import { UploadOutlined } from '@ant-design/icons-vue'
-import { computed, ref, reactive } from 'vue'
+import { UploadOutlined, CloseOutlined } from '@ant-design/icons-vue'
+import { computed, ref, reactive, nextTick, Ref, toRaw } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { useInfoStore } from '@/store/modules/info'
-import { addArticle, updateArticle, updateImg } from '@/api/auth/api'
-import { getAllArticles } from '@/api/info/api'
+import { addArticle, updateArticle, updateImg, addLabel } from '@/api/auth/api'
+import { getAllArticles, getLabel } from '@/api/info/api'
 // import { cloneDeep } from 'lodash-es'
 const infoStore = useInfoStore()
-const articles = computed(() => infoStore.articles)
+
+const labels: Ref<any> = computed(() => infoStore.labels)
 const route = useRoute()
 const router = useRouter()
 const id: any = ref(route.params.id)
-console.log(id, articles)
 const isEdit = id.value ? true : false
+const rawArticle: any = toRaw(infoStore.getArticleById(parseInt(id.value)))
 const currentArticle: any = isEdit
-  ? ref(
-      articles.value.find((item: any) => {
-        return item.id == id.value
-      })
-    )
+  ? ref({ ...rawArticle })
   : ref({
       content: '',
       title: '',
-      category: '',
-      type: 1,
+      label: '',
       description: '',
       image: ''
     })
-
 const fileList: any = ref([])
 if (isEdit) {
   fileList
@@ -92,10 +133,9 @@ const state = reactive({
   catalogList: []
 })
 const save = () => {
-  console.log(currentArticle)
-  currentArticle.value.type = 1
   const formData = new FormData()
   if (isEdit) {
+    //编辑文章的情况下
     updateArticle(currentArticle.value).then((response) => {
       console.log(response)
       if (response.status === 0) {
@@ -120,6 +160,7 @@ const save = () => {
         })
     }
   } else {
+    //添加新文章的情况下
     if (fileList.value.length !== 0) {
       addArticle(currentArticle.value).then((response) => {
         // console.log(response)
@@ -155,10 +196,60 @@ const beforeUpload = (file: any) => {
   console.log(fileList.value)
   return false
 }
+const inputRef = ref()
+const inputValue = ref('')
+const TagsVisible = ref(false)
+const handleClose = (removedTag: string) => {
+  const label = currentArticle.value.label
+  const index = label.indexOf(removedTag)
+  currentArticle.value.label = label.replace(removedTag, '')
+  if (removedTag.length === label.length)
+    //只有一个标签的情况下
+    currentArticle.value.label = ''
+  else if (index === 0)
+    //标签就在第一个
+    currentArticle.value.label = label.replace(removedTag + ',', '')
+  else currentArticle.value.label = label.replace(',' + removedTag, '')
+  // const tags = currentArticle.value.label.filter((tag) => tag !== removedTag)
+  // console.log(tags)
+  // Tagstate.tags = tags
+}
+
+const showInput = () => {
+  TagsVisible.value = true
+  nextTick(() => {
+    inputRef.value.focus()
+  })
+}
+
+const handleInputConfirm = async () => {
+  const value = inputValue.value
+  if (currentArticle.value.label.indexOf(value) !== -1) {
+    message.warn('已存在该标签！')
+    return
+  }
+  const Labelres = await addLabel(value)
+  if (Labelres.status === 0) {
+    currentArticle.value.label += `,${value}`
+    inputValue.value = ''
+    getLabel().then((res) => {
+      infoStore.setLabel(res.data)
+    })
+  }
+}
+const handleLabelsConfirm = (label_name: string) => {
+  const str = currentArticle.value.label.length === 0 ? '' : ','
+  currentArticle.value.label += str + label_name
+}
 </script>
 
 <style scoped>
 .img-container {
   height: 100px;
+}
+.closebtn:hover {
+  background-color: #ccc;
+  cursor: pointer;
+  border-radius: 4px;
 }
 </style>

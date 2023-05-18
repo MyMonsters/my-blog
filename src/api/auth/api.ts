@@ -75,3 +75,9 @@ export function addComment(comment: {
     headers: { Authorization: ` ${token}` }
   })
 }
+
+export function addLabel(label_name: string) {
+  return request.post('auth/addLabel', qs.stringify({ label_name }), {
+    headers: { Authorization: ` ${token}` }
+  })
+}

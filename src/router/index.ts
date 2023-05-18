@@ -71,6 +71,19 @@ const routes: RouteRecordRaw[] = [
         component: () => {
           return import('../views/Info/Timeline.vue')
         }
+      },
+      {
+        path: 'label',
+        component: () => {
+          return import('../views/Info/Label.vue')
+        }
+      },
+      {
+        path: ':label_name',
+        props: (route) => ({ query: route.query.label_id }),
+        component: () => {
+          return import('../views/Info/ArticleByLabel.vue')
+        }
       }
     ]
   },

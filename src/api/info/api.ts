@@ -18,3 +18,9 @@ export function testToken() {
 export function getComment() {
   return request.get('/record/getComment')
 }
+export function getLabel() {
+  return request.get('/record/getLabel')
+}
+export function getArticleByLabelName(label_name: string | string[]) {
+  return request.get(`/record/getArticleByLabelName/${label_name}`)
+}
