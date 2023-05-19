@@ -7,9 +7,14 @@
     />
     <div class="artical-detail bg-transparent flex justify-evenly">
       <a-card hoverable class="item-container w-2/3">
-        <div class="flexContainer">
-          <a-tag color="green">{{ recordDetail.category }}</a-tag>
-          <a-tag color="green">{{ recordDetail.time }}</a-tag>
+        <div class="flex mb-5">
+          <div
+            v-for="labelItem in recordDetail.label ? recordDetail.label.split(',') : []"
+            :key="labelItem"
+          >
+            <a-tag color="green"><tag-outlined class="mr-2" />{{ labelItem }}</a-tag>
+          </div>
+          <div class="text-md font-medium">{{ recordDetail.time }}</div>
         </div>
 
         <h1 class="list-title">
@@ -54,9 +59,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { reactive } from 'vue'
+import { TagOutlined } from '@ant-design/icons-vue'
 import MdEditor from 'md-editor-v3'
 import Editor from '@/components/Editor.vue'
 import Comments from './components/comments.vue'
@@ -64,12 +70,10 @@ import 'md-editor-v3/lib/style.css'
 import { useInfoStore } from '@/store/modules/info'
 import { router } from '@/router'
 const route = useRoute()
-const id = route.params.id
+const id: any = ref(route.params.id)
 const infoStore = useInfoStore()
 const previewOnly = true
-const articles = computed(() => infoStore.articles)
 const MdCatalog = MdEditor.MdCatalog
-// const text = ref(infoStore.currentArticle.content)
 const scrollElement = document.documentElement
 const state = reactive({
   id: 'article',
@@ -80,14 +84,9 @@ const state = reactive({
 const onGetCatalog = (list: any) => {
   state.catalogList = list
 }
-const recordDetail: any = articles.value.find((item: any) => {
-  return item.id == id
-})
-console.log(recordDetail)
 
-// service.get('/record/getArticleById/' + id).then((response) => {
-// 	recordDetail.list = response.data
-// })
+const recordDetail: any = infoStore.getArticleById(parseInt(id.value))
+console.log(recordDetail)
 </script>
 
 <style scoped>
