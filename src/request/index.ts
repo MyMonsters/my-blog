@@ -2,7 +2,6 @@ import Axios from 'axios'
 import { message } from 'ant-design-vue'
 import NProgress from 'nprogress'
 
-
 const axios = Axios.create({
   baseURL: import.meta.env.VITE_GLOB_API_URL,
   timeout: 20000 // 请求超时 20s

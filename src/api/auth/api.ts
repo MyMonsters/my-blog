@@ -1,8 +1,9 @@
 import request from '@/request'
 import qs from 'qs'
 import localCache from '@/utils/cache'
-
-const token = localCache.getCache('token')
+import { useAuthStore } from '@/store/modules/auth'
+const authStore = useAuthStore()
+const token = authStore.token
 //操作article
 export function accountLoginAPI(account: Account): Promise<LoginAPIRes> {
   return request.post('/log/login', qs.stringify(account))
