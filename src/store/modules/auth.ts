@@ -30,7 +30,6 @@ export const useAuthStore = defineStore({
     },
     async accountLoginAction(account: Account) {
       // 1.实现登录逻辑
-      console.log('object')
       const loginResult = await accountLoginAPI(account)
       console.log('loginResult', loginResult)
       if (loginResult.code === 200) {
