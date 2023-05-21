@@ -73,6 +73,10 @@ import { TagOutlined } from '@ant-design/icons-vue'
 const infoStore = useInfoStore()
 const router = useRouter()
 const articleRef = ref()
+getAllArticles().then((res) => {
+  console.log(res)
+  infoStore.setArticles(res.data)
+})
 const articles = computed(() => infoStore.articles)
 const ellipsis = ref(true)
 // store.dispatch('getArticleList')
@@ -94,7 +98,7 @@ const sendNew = () => {
   router.push('/authMain/operateContent/editArticle')
 }
 const removeRecord = (id: string) => {
-  removeArticle(id).then((response: any) => {
+  removeArticle(id).then((response) => {
     console.log(response)
     if (response.status === 0) {
       message.success('删除成功！')
