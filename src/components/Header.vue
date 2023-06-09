@@ -8,7 +8,7 @@ import Icon, {
 } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import Todos from './Todos.vue'
-
+import SwitchDark from './switchDark/index.vue'
 // const props = defineProps<{ msg: string }>()
 const emit: any = defineEmits<{ (ifFold: boolean): void }>()
 const onBreakpoint = (broken: boolean) => {
@@ -125,6 +125,7 @@ const onClose = () => {
             <info-circle-two-tone /><span style="margin-left: 4px">ABOUT</span>
           </div>
         </router-link>
+        <SwitchDark />
       </div>
     </div>
   </a-layout-header>
@@ -180,10 +181,13 @@ const onClose = () => {
   </a-layout-sider>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .header {
   /* background-color: #eceaec; */
   background-image: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
+  [data-theme='dark'] & {
+    background-image: linear-gradient(25deg, #1a447f, #5873a5, #8da7cb, #c2def3);
+  }
   font-size: medium;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
 
@@ -204,6 +208,9 @@ const onClose = () => {
   background: none;
   text-transform: uppercase;
   color: #04002c;
+  [data-theme='dark'] & {
+    color: rgb(248, 246, 248);
+  }
   /* font-weight: bold; */
   position: relative;
   outline: none;

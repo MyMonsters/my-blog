@@ -6,7 +6,7 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 
 export default defineConfig((env) => {
-  const viteEnv = loadEnv(env.mode, process.cwd()) as unknown as ImportMetaEnv
+  // const viteEnv = loadEnv(env.mode, process.cwd()) as unknown as ImportMetaEnv
   return {
     plugins: [
       vue(),
@@ -17,6 +17,14 @@ export default defineConfig((env) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
+      }
+    },
+    css: {
+      preprocessorOptions: {
+        // 全局样式引入
+        scss: {
+          additionalData: `@use "@/assets/style/dark.scss" as *;`
+        }
       }
     },
     base: './', // 设置打包路径

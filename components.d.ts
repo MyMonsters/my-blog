@@ -56,6 +56,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Sider: typeof import('./src/components/Sider.vue')['default']
+    SwitchDark: typeof import('./src/components/switchDark/index.vue')['default']
     Todos: typeof import('./src/components/Todos.vue')['default']
   }
 }

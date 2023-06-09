@@ -47,7 +47,7 @@
 
 <script lang="ts" setup></script>
 
-<style scoped>
+<style lang="scss" scoped>
 .profile {
   height: 128px;
   width: 128px;
@@ -58,6 +58,9 @@
 .siderContainer {
   /* height: 1000px; */
   background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  [data-theme='dark'] & {
+    background-image: linear-gradient(25deg, #7288c5, #8ca5cb, #a4c4d0, #bbe3d5);
+  }
   margin: 10px;
   border-radius: 20px;
   min-height: 700px;

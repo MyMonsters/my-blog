@@ -27,13 +27,16 @@ getTodoList().then((res) => {
 const todoList: any = computed(() => infoStore.todolist)
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 /* .container {
   background-color: azure;
 } */
 .todos {
   background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
   margin: 10px;
+  [data-theme='dark'] & {
+    background-image: linear-gradient(25deg, #7288c5, #8ca5cb, #a4c4d0, #bbe3d5);
+  }
   border-radius: 20px;
   text-align: left;
   width: 100%;

@@ -1,0 +1,27 @@
+$themes: (
+    dark: (
+        menu_back_ground: #370d55,
+        font_color: #fff,
+    ),
+);
+//遍历$themes变量，将子map升级为全局。让函数中可以调用这个$theme-map
+@mixin themeify {
+    @each $theme-name, $theme-map in $themes {
+        $theme-map: $theme-map !global;
+        //根标签里添加了data-theme='dark'  最后选择器变为[data-theme='dark'] .xxx{}
+        [data-theme="#{$theme-name}"] & {
+            @content;
+        }
+    }
+}
+
+//根据key获取对应的样式值  最后返回的就是#fff
+@function themed($key) {
+    @return map-get($theme-map, $key);
+}
+
+@mixin menu_back_ground {
+    @include themeify {
+        background-color: themed("menu_back_ground");
+    }
+}

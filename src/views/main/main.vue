@@ -23,11 +23,15 @@ const handleFoldChange = (isFold: boolean) => {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .center {
   width: 100%;
 
   background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  [data-theme='dark'] & {
+    background-image: linear-gradient(25deg, #7288c5, #8ca5cb, #a4c4d0, #bbe3d5);
+  }
+
   /* background: linear-gradient(to right, rgb(236, 236, 243), rgb(223, 193, 198)); */
   margin: 10px 0;
   min-height: 700px;
