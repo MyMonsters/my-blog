@@ -32,7 +32,8 @@ import {
   Tabs,
   Form,
   FormItem,
-  CheckableTag
+  CheckableTag,
+  Avatar
 } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import { Link } from 'ant-design-vue/lib/anchor'
@@ -72,7 +73,8 @@ const components = [
   Form,
   FormItem,
   Link,
-  CheckableTag
+  CheckableTag,
+  Avatar
 ]
 
 export default function registerElement(app: any) {

@@ -18,15 +18,26 @@
     <div class="flex items-center justify-between">
       <a-upload
         v-model:file-list="fileList"
-        list-type="text"
+        list-type="picture"
         :max-count="1"
-        :customRequest="handleUpload"
+        :before-upload="beforeUpload"
       >
         <a-button class="button-8">
           <upload-outlined></upload-outlined>
           上传头像
         </a-button>
       </a-upload>
+      <!-- <a-upload
+        v-model:file-list="fileList"
+        list-type="picture"
+        class="upload-list-inline"
+        :before-upload="beforeUpload"
+      >
+        <a-button>
+          <upload-outlined></upload-outlined>
+          Select File
+        </a-button>
+      </a-upload> -->
       <button class="button-8" role="button" @click="handleSendComment">发表</button>
     </div>
   </div>
@@ -35,7 +46,7 @@
 <script lang="ts" setup>
 import { ref, Ref } from 'vue'
 import { message, UploadProps } from 'ant-design-vue'
-import { addComment, updateImg } from '@/api/auth/api'
+import { addComment, updateAvatarImg } from '@/api/auth/api'
 import { getComment } from '@/api/info/api'
 import { useInfoStore } from '@/store/modules/info'
 const props = defineProps({ parent_id: Number, parent_name: String, article_id: Number })
@@ -43,7 +54,9 @@ const parent_id: Ref<number | undefined> = ref(props.parent_id)
 const parent_name: Ref<string | undefined> = ref(props.parent_name)
 const article_id: Ref<number | undefined> = ref(props.article_id)
 const fileList: any = ref<UploadProps['fileList']>([])
+
 const infoStore = useInfoStore()
+
 const comment = ref({
   content: '',
   website: '',
@@ -53,17 +66,28 @@ const comment = ref({
   replyto: '',
   article_id
 })
-const handleUpload = (file: any) => {
-  console.log(file)
-  const formData = new FormData()
-  formData.append('pic', fileList.value[0].originFileObj)
-  updateImg(formData)
+const beforeUpload = (file: any) => {
+  fileList.value = [...fileList.value, file]
+  console.log(fileList.value)
+  return false
 }
+// const handleUpload = (file: any) => {
+//   console.log(file)
+//   formData.append('pic', fileList.value[0].originFileObj)
+//   //
+// }
 const handleSendComment = () => {
   if (parent_id.value) comment.value.parent_id = parent_id.value
   if (parent_name.value) comment.value.replyto = parent_name.value
-  addComment(comment.value).then((res) => {
+  addComment(comment.value).then(async (res: any) => {
     if (res.status === 0) {
+      const formData = new FormData()
+      formData.set('id', res.id)
+      formData.append('pic', fileList.value[0].originFileObj)
+      console.log(formData)
+      await updateAvatarImg(formData)
+      formData.delete('id')
+      formData.delete('pic')
       infoStore.setCurrentCommentId(-1)
       getComment().then((res) => {
         message.info('发送成功！')

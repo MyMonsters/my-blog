@@ -102,7 +102,7 @@ import { message } from 'ant-design-vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { useInfoStore } from '@/store/modules/info'
-import { addArticle, updateArticle, updateImg, addLabel } from '@/api/auth/api'
+import { addArticle, updateArticle, updateArticleImg, addLabel } from '@/api/auth/api'
 import { getAllArticles, getLabel } from '@/api/info/api'
 // import { cloneDeep } from 'lodash-es'
 const infoStore = useInfoStore()
@@ -145,7 +145,7 @@ const save = () => {
     if (fileList.value.length !== 0) {
       formData.append('pic', fileList.value[0].originFileObj)
       formData.append('id', id.value)
-      updateImg(formData)
+      updateArticleImg(formData)
         .then((response) => {
           // fileList.value = ""
           console.log(response.data)
@@ -169,7 +169,7 @@ const save = () => {
         formData.append('pic', fileList.value[0].originFileObj)
         id.value = response.id
         formData.set('id', id.value)
-        updateImg(formData).then((response) => {
+        updateArticleImg(formData).then((response) => {
           //  fileList.value = []
           console.log('updateImg', response)
           // if (response.data.status === 0) {

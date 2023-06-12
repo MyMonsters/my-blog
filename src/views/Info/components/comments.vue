@@ -7,7 +7,7 @@
   >
     <div class="text-left flex flex-row">
       <div class="mt-4 mb-4 mr-4">
-        <a-avatar src="https://joeschmoe.io/api/v1/random" :size="50" />
+        <a-avatar :src="item.image" :size="50"></a-avatar>
       </div>
       <div class="flex flex-col flex-1">
         <div class="flex items-center">

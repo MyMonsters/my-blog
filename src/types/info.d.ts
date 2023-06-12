@@ -28,6 +28,7 @@ interface Comment {
   replyto: string
   create_time: string
   article_id: number
+  image: string
 }
 interface Label {
   label_id: number

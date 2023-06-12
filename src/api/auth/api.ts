@@ -27,9 +27,16 @@ export function updateArticle(article: Article) {
   })
 }
 
-export function updateImg(formData: FormData) {
+export function updateAvatarImg(formData: FormData) {
   const token = localCache.getCache('token')
-  return request.post('/uploadImg', formData, {
+  console.log(formData)
+  return request.post('/cos/uploadAvatarImg', formData, {
+    headers: { Authorization: ` ${token}` }
+  })
+}
+export function updateArticleImg(formData: FormData) {
+  const token = localCache.getCache('token')
+  return request.post('/cos/uploadArticleImg', formData, {
     headers: { Authorization: ` ${token}` }
   })
 }
