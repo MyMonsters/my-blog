@@ -35,7 +35,6 @@
                 <span
                   class="m-1 bg-amber-100 text-amber-600 p-1"
                   v-for="item in labels"
-                  v-show="currentArticle.label.indexOf(item.label_name) === -1"
                   :key="item.label_id"
                   @click="handleLabelsConfirm(item.label_name)"
                 >
@@ -106,7 +105,9 @@ import { addArticle, updateArticle, updateArticleImg, addLabel } from '@/api/aut
 import { getAllArticles, getLabel } from '@/api/info/api'
 // import { cloneDeep } from 'lodash-es'
 const infoStore = useInfoStore()
-
+getLabel().then((res) => {
+  infoStore.setLabel(res.data)
+})
 const labels: Ref<any> = computed(() => infoStore.labels)
 const route = useRoute()
 const router = useRouter()
@@ -230,7 +231,9 @@ const handleInputConfirm = async () => {
   }
   const Labelres = await addLabel(value)
   if (Labelres.status === 0) {
-    currentArticle.value.label += `,${value}`
+    currentArticle.value.label
+      ? (currentArticle.value.label += `,${value}`)
+      : (currentArticle.value.label += `${value}`)
     inputValue.value = ''
     getLabel().then((res) => {
       infoStore.setLabel(res.data)

@@ -14,7 +14,7 @@
           >
             <a-tag color="green"><tag-outlined class="mr-2" />{{ labelItem }}</a-tag>
           </div>
-          <div class="text-md font-medium">{{ recordDetail.time }}</div>
+          <div class="text-md font-medium">{{ recordDetail.create_time }}</div>
         </div>
 
         <h1 class="list-title">
@@ -49,11 +49,13 @@
           <Comments :article_id="recordDetail.id" />
         </div>
       </a-card>
+      <!-- <a-card> -->
       <a-affix :offset-top="0" class="w-1/4">
         <a-card hoverable>
           <MdCatalog :editorId="state.id" :scrollElement="scrollElement" :theme="state.theme" />
         </a-card>
       </a-affix>
+      <!-- </a-card> -->
     </div>
   </a-layout>
 </template>

@@ -34,7 +34,8 @@ const handleFoldChange = (isFold: boolean) => {
 
   /* background: linear-gradient(to right, rgb(236, 236, 243), rgb(223, 193, 198)); */
   margin: 10px 0;
-  min-height: 700px;
+  min-height: 800px;
+  height: 90vh;
   border-radius: 20px;
   /* box-shadow: rgba(194, 156, 211, 0.25) 0px 30px 60px -12px inset,
 		rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */

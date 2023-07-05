@@ -45,7 +45,7 @@
             </a-popconfirm>
           </div>
           <div class="text-left">
-            <a-tag color="#87d068">{{ item.time }}</a-tag>
+            <a-tag color="#87d068">{{ item.create_time }}</a-tag>
 
             <span v-for="labelItem in item.label ? item.label.split(',') : []" :key="labelItem">
               <a-tag color="green"><tag-outlined class="mr-2" />{{ labelItem }}</a-tag>

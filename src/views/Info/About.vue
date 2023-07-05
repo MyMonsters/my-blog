@@ -16,6 +16,6 @@
 }
 
 .about {
-  height: 800px;
+  height: 100%;
 }
 </style>

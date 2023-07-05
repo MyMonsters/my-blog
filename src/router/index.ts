@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import localCache from '@/utils/cache'
 // import { setupPageGuard } from './permission';
 
@@ -69,6 +69,13 @@ const routes: RouteRecordRaw[] = [
         path: 'timeline',
         component: () => {
           return import('../views/Info/Timeline.vue')
+        }
+      },
+
+      {
+        path: 'link',
+        component: () => {
+          return import('../views/Info/Link.vue')
         }
       },
       {
@@ -149,7 +156,7 @@ const routes: RouteRecordRaw[] = [
 ]
 
 export const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 

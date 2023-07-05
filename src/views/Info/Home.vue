@@ -1,21 +1,22 @@
 <template>
-  <a-layout class="container">
+  <div>
     <!-- <Sider :width="collapse ? '0px' : '210px'" />
 			<Content :type="1" />
 			<todos :width="collapse ? '0px' : '210px'" /> -->
     <img src="@/assets/img/svg.svg" />
-  </a-layout>
+  </div>
 </template>
 
 <script lang="ts" setup>
 // import Content from '@/components/Content.vue'
 </script>
 
-<style scoped>
-.container {
-  /* background-color: #f0f2f5; */
-  width: 100%;
-  min-height: 700px;
+<style lang="scss" scoped>
+/* background-color: #f0f2f5; */
+
+img {
   height: 100%;
+
+  margin: auto;
 }
 </style>

@@ -9,6 +9,9 @@ import { setupRouter } from './router'
 import registerElement from '@/utils/register-element'
 import { testToken } from './api/info/api'
 import localCache from '@/utils/cache'
+
+import 'virtual:svg-icons-register'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 const app = createApp(App)
 
 const token = localCache.getCache('token')
@@ -23,4 +26,4 @@ testToken()
 setupStore(app)
 setupRouter(app)
 registerElement(app)
-app.mount('#app')
+app.component('svg-icon', SvgIcon).mount('#app')
