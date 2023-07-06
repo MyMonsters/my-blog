@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <router-view />
+    <router-view class="Authcenter" />
   </div>
 </template>
 
@@ -9,4 +9,9 @@
 import Header from '@/components/Header.vue'
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.Authcenter {
+  min-height: 800px;
+  height: 90vh;
+}
+</style>

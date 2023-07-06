@@ -96,7 +96,7 @@ const removeTimeline = (id: string) => {
 
 <style scoped>
 .operate-timeline-wrapper {
-  height: 100%;
+  height: 90vh;
   background-color: white;
   border-radius: 20px;
 }

@@ -98,7 +98,7 @@ const iscreate = ref(false)
 <style scoped>
 .operateTodos {
   background-color: white;
-  min-height: 500px;
+  min-height: 90vh;
   border-radius: 20px;
   width: 100%;
 }

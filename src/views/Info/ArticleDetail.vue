@@ -31,7 +31,7 @@
         </div>
         <div class="content-container">
           <!-- <preview :value="item.content" /> -->
-          <MdEditor
+          <MdPreview
             :editorId="state.id"
             v-model="recordDetail.content"
             :previewTheme="state.theme"
@@ -50,7 +50,7 @@
         </div>
       </a-card>
       <!-- <a-card> -->
-      <a-affix :offset-top="0" class="w-1/4">
+      <a-affix :offset-top="0" class="w-1/4 text-left">
         <a-card hoverable>
           <MdCatalog :editorId="state.id" :scrollElement="scrollElement" :theme="state.theme" />
         </a-card>
@@ -65,7 +65,7 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { reactive } from 'vue'
 import { TagOutlined } from '@ant-design/icons-vue'
-import MdEditor from 'md-editor-v3'
+import { MdPreview, MdCatalog } from 'md-editor-v3'
 import Editor from '@/components/Editor.vue'
 import Comments from './components/comments.vue'
 import 'md-editor-v3/lib/style.css'
@@ -75,7 +75,7 @@ const route = useRoute()
 const id: any = ref(route.params.id)
 const infoStore = useInfoStore()
 const previewOnly = true
-const MdCatalog = MdEditor.MdCatalog
+// const MdCatalog = MdPreview.MdCatalog
 const scrollElement = document.documentElement
 const state = reactive({
   id: 'article',
