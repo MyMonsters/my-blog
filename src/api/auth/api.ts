@@ -101,3 +101,33 @@ export function addLabel(label_name: string) {
     headers: { Authorization: ` ${token}` }
   })
 }
+
+//操作project
+export function updateProjectAPI(info: Project) {
+  const token = localCache.getCache('token')
+  return request.post('/auth/updateProject', qs.stringify(info), {
+    headers: { Authorization: ` ${token}` }
+  })
+}
+export function removeProjectAPI(id: string) {
+  const token = localCache.getCache('token')
+  return request.post('/auth/removeProject', qs.stringify({ id: id }), {
+    headers: { Authorization: ` ${token}` }
+  })
+}
+export function addProjectAPI(info: {
+  link: string
+  desc: string
+  imgUrl: string
+}): Promise<addProjectRes> {
+  const token = localCache.getCache('token')
+  return request.post('/auth/addProject', qs.stringify(info), {
+    headers: { Authorization: ` ${token}` }
+  })
+}
+export function updateAboutAPI(info: { type: string; intro: string; theme: string }) {
+  const token = localCache.getCache('token')
+  return request.post('/auth/updateAbout', qs.stringify(info), {
+    headers: { Authorization: token }
+  })
+}

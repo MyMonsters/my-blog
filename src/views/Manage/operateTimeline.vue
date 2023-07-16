@@ -65,9 +65,8 @@ const handleAdd = () => {
     time: 'time'
   }
   addTimelineAPI(info).then((res) => {
-    console.log(res)
     let newtimeline: any = infoStore.timeline
-    newtimeline.push({ ...info, id: res.id })
+    newtimeline.unshift({ ...info, id: res.id })
     infoStore.setTimeline(newtimeline)
   })
 }

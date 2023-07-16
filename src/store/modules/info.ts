@@ -12,6 +12,8 @@ export const useInfoStore = defineStore('infoState', {
     comments: [],
     currentCommentId: -1,
     labels: [],
+    projects: [],
+    about: [],
     currentLabelID: -1
   }),
   getters: {
@@ -51,6 +53,13 @@ export const useInfoStore = defineStore('infoState', {
     },
     setCurrentLabelID(label_id: any) {
       this.currentLabelID = label_id
+    },
+    setProject(projects: any) {
+      this.projects = projects
+    },
+    setAbout(about: any) {
+      // console.log(about)
+      this.about = about
     }
   },
 

@@ -20,3 +20,6 @@ interface RemoveArticleRes {
 interface addTimelineRes {
   id: string
 }
+interface addProjectRes {
+  id: string
+}

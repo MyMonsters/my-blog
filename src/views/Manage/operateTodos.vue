@@ -12,7 +12,7 @@
         <a-button type="primary" @click="iscreate = false">取消</a-button>
       </div>
     </div>
-    <div v-for="item in todoList" :key="item.id">
+    <div v-for="item in todoList" :key="item.id" class="text-left ml-20">
       <a-col :span="24">
         <a-checkbox
           v-if="item.isdone"
@@ -20,7 +20,9 @@
           :value="item.id"
           style="margin: 4px 0"
           disabled
-          ><a-typography-text delete>{{ item.title }}</a-typography-text></a-checkbox
+          ><a-typography-text class="text-2xl" delete>{{
+            item.title
+          }}</a-typography-text></a-checkbox
         >
         <a-checkbox
           v-else
@@ -28,7 +30,7 @@
           v-model:checked="item.isdone"
           :value="item.id"
           @change="doneTodo(item.id)"
-          >{{ item.title }}</a-checkbox
+          ><span class="text-2xl">{{ item.title }}</span></a-checkbox
         >
         <a-button type="link" @click="removeTodo(item.id)">删除</a-button>
       </a-col>

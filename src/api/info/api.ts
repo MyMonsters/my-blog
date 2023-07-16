@@ -24,3 +24,9 @@ export function getLabel() {
 export function getArticleByLabelName(label_name: string | string[]) {
   return request.get(`/record/getArticleByLabelName/${label_name}`)
 }
+export function getProject() {
+  return request.get('/record/getProject')
+}
+export function getAbout() {
+  return request.get('/record/getAbout')
+}

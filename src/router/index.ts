@@ -131,12 +131,25 @@ const routes: RouteRecordRaw[] = [
               return import('../views/Manage/operateTodos.vue')
             }
           },
-          // {
-          //   path: 'project',
-          //   component: () => {
-          //     return import('../views/Manage/operateProject.vue')
-          //   }
-          // },
+          {
+            path: 'project',
+            component: () => {
+              return import('../views/Manage/operateProject.vue')
+            }
+          },
+
+          {
+            path: 'link',
+            component: () => {
+              return import('../views/Manage/operateLink.vue')
+            }
+          },
+          {
+            path: 'about',
+            component: () => {
+              return import('../views/Manage/operateAbout.vue')
+            }
+          },
           {
             path: 'editArticle/:id?',
             component: () => {

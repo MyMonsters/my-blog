@@ -1,11 +1,11 @@
 <template>
   <div class="project-wrapper flex justify-evenly">
-    <div class="project-item" v-for="item of data.list" :key="item.id">
+    <div class="project-item" v-for="item of project" :key="item.project_id">
       <a :href="item.link" class="info-wrapper">
-        <img :src="item.image" style="border-radius: 20px" class="img-item" />
+        <img :src="item.imgUrl" style="border-radius: 20px" class="img-item" />
         <div class="cover flex items-center justify-center">
           <LinkOutlined />
-          {{ item.title }}
+          {{ item.desc }}
         </div>
       </a>
     </div>
@@ -13,27 +13,30 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { computed } from 'vue'
 import { LinkOutlined } from '@ant-design/icons-vue'
-
-const data: any = reactive({})
-data.list = [
-  {
-    id: 0,
-    title: 'Vue2+JS+bootstrap官网展示',
-    link: 'https://machao.group',
-    image: 'https://zplus-blog-1305209635.cos.ap-nanjing.myqcloud.com/img/MaLab.png'
-    // image: 'https://img.lzxjack.top:99/202203292224441.webp'
-  },
-  {
-    id: 1,
-    title: 'Vue工具箱系统',
-    link: 'https://tool.machao.group',
-    // image: 'https://zplus-blog-1305209635.cos.ap-nanjing.myqcloud.com/img/MaLab.png'
-    image:
-      'https://zplus-blog-1305209635.cos.ap-nanjing.myqcloud.com/img/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20230705164422.png'
-  }
-]
+import { useInfoStore } from '@/store/modules/info'
+import { getProject } from '@/api/info/api'
+const infoStore = useInfoStore()
+getProject().then((res) => {
+  infoStore.setProject(res.data)
+})
+const project: any = computed(() => infoStore.projects)
+// data.list = [
+//   {
+//     project_id: 0,
+//     desc: 'Vue2+JS+bootstrap官网展示',
+//     link: 'https://machao.group',
+//     imgUrl: 'https://zplus-blog-1305209635.cos.ap-nanjing.myqcloud.com/img/MaLab.png'
+//   },
+//   {
+//     project_id: 1,
+//     desc: 'Vue工具箱系统',
+//     link: 'https://tool.machao.group',
+//     imgUrl:
+//       'https://zplus-blog-1305209635.cos.ap-nanjing.myqcloud.com/img/%E8%81%94%E6%83%B3%E6%88%AA%E5%9B%BE_20230705164422.png'
+//   }
+// ]
 </script>
 
 <style lang="scss" scoped>

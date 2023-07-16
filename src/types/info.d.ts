@@ -34,3 +34,14 @@ interface Label {
   label_id: number
   label_name: string
 }
+interface Project {
+  project_id: number
+  desc: string
+  link: string
+  imgUrl: string
+}
+interface About {
+  type: string
+  intro: string
+  theme: string
+}
