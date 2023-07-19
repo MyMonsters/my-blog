@@ -34,8 +34,12 @@ import 'md-editor-v3/lib/style.css'
 import { useInfoStore } from '@/store/modules/info'
 import { updateAboutAPI } from '@/api/auth/api'
 import { message } from 'ant-design-vue'
+import { getAbout } from '@/api/info/api'
 const infoStore = useInfoStore()
-
+getAbout().then((res) => {
+  console.log(res.data)
+  infoStore.setAbout(res.data)
+})
 const aboutInfo: any = computed(() => infoStore.about)
 const blogInfo = aboutInfo.value[0]
 const meInfo = aboutInfo.value[1]

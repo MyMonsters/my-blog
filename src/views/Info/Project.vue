@@ -51,7 +51,7 @@ const project: any = computed(() => infoStore.projects)
     .info-wrapper {
       /* position: relative; */
       .img-item {
-        /* height: 250px; */
+        height: 250px;
         width: 100%;
         overflow: hidden;
       }

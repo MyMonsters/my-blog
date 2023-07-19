@@ -32,7 +32,7 @@ export default defineConfig((env) => {
         }
       }
     },
-    base: './', // 设置打包路径
+    base: '/', // 设置打包路径
     server: {
       port: 4000, // 设置服务启动端口号
       open: true, // 设置服务启动时是否自动打开浏览器
