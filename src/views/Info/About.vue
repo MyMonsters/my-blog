@@ -19,7 +19,11 @@ const blog = reactive({
   theme: blogInfo.theme,
   codeTheme: 'github'
 })
-
+console.error(
+  '%cConsole error Test===>>>: ',
+  'color: MidnightBlue; background: Aquamarine; font-size: 20px;',
+  'Console error Test'
+)
 const myself = reactive({
   // '## 🤖About Me    ### 💻 前端选手\n  ### ☘️ React, Redux \n ### ☘️ Vue, Vue-router, Pinia, Vuex\n ### ☘️ Antd, Element UI \n### ☘️ Express\n### ☘️ Echarts, ThreeJS',
   content: meInfo.intro,

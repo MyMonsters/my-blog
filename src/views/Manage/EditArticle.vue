@@ -169,15 +169,15 @@ const save = () => {
         console.log(response)
         formData.append('pic', fileList.value[0].originFileObj)
         id.value = response.id
-        formData.set('id', id.value)
+        formData.append('id', id.value)
         updateArticleImg(formData).then((response) => {
           //  fileList.value = []
           console.log('updateImg', response)
-          // if (response.data.status === 0) {
-          //   message.success('上传成功')
-          // } else {
-          //   message.error(response.data.message)
-          // }
+          if (response.data.status === 0) {
+            message.success('上传成功')
+          } else {
+            message.error(response.data.message)
+          }
         })
       })
     } else {

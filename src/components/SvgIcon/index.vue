@@ -6,15 +6,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-const props = withDefaults(
-  defineProps<{
-    prefix: string
-    name: string
-    color: string
-  }>(),
-  { prefix: 'icon' }
-)
-const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+const props = defineProps({
+  color: { type: String, required: false },
+  name: String
+})
+
+const symbolId = computed(() => `#icon-${props.name}`)
 </script>
 
 <style scoped></style>

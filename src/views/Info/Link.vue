@@ -5,16 +5,16 @@
     <div>
       <ul class="info-list">
         <li>
-          <h2>name：</h2>
+          <h2>🐉 <span class="ml-4">name：</span><span>Jasmine's blog</span></h2>
         </li>
         <li>
-          <h2>link：</h2>
+          <h2>🦎 <span class="ml-4">link：https://zplusplus.top</span></h2>
         </li>
         <li>
-          <h2>avatar：</h2>
+          <h2>🦚 <span class="ml-4">avatar：</span><span></span></h2>
         </li>
         <li>
-          <h2>description：</h2>
+          <h2>🐢 <span class="ml-4">description：</span><span>Never say never</span></h2>
         </li>
       </ul>
     </div>
@@ -73,8 +73,6 @@ const linkList = ref([
   color: rgb(90, 95, 99);
 }
 .info-list {
-  list-style: circle;
-  color: rgb(114, 43, 184);
   margin: 30px 0 0 80px;
   font-size: 20px;
   text-align: left;

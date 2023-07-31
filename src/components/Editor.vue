@@ -46,6 +46,7 @@
 <script lang="ts" setup>
 import { ref, Ref } from 'vue'
 import { message, UploadProps } from 'ant-design-vue'
+import 'ant-design-vue/es/message/style/css'
 import { addComment, updateAvatarImg } from '@/api/auth/api'
 import { getComment } from '@/api/info/api'
 import { useInfoStore } from '@/store/modules/info'

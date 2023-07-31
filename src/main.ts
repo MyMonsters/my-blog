@@ -6,7 +6,6 @@ import 'nprogress/nprogress.css'
 import App from './App.vue'
 import { setupStore } from './store'
 import { setupRouter } from './router'
-import registerElement from '@/utils/register-element'
 import { testToken } from './api/info/api'
 import localCache from '@/utils/cache'
 
@@ -25,5 +24,5 @@ if (token !== undefined && token !== null) {
 testToken()
 setupStore(app)
 setupRouter(app)
-registerElement(app)
+
 app.component('svg-icon', SvgIcon).mount('#app')

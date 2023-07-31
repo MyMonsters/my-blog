@@ -1,5 +1,7 @@
 import Axios from 'axios'
+
 import { message } from 'ant-design-vue'
+import 'ant-design-vue/es/message/style/css'
 import NProgress from 'nprogress'
 
 const axios = Axios.create({
