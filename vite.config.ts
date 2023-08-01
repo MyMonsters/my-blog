@@ -43,9 +43,9 @@ export default defineConfig((env) => {
       // 设置代理，根据我们项目实际情况配置
       proxy: {
         '/api': {
-          target: 'http://101.34.205.91:8181',
+          target: 'https://blogapi.zplusplus.top',
           changeOrigin: true,
-          secure: false,
+          secure: true,
           rewrite: (path) => path.replace('/api/', '/')
         }
       }
