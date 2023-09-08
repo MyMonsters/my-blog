@@ -33,7 +33,9 @@ import {
   Form,
   FormItem,
   CheckableTag,
-  Avatar
+  Avatar,
+  Collapse,
+  CollapsePanel
 } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import { Link } from 'ant-design-vue/lib/anchor'
@@ -74,7 +76,9 @@ const components = [
   FormItem,
   Link,
   CheckableTag,
-  Avatar
+  Avatar,
+  Collapse,
+  CollapsePanel
 ]
 
 export default function registerElement(app: any) {

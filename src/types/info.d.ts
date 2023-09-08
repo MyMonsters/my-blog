@@ -12,6 +12,7 @@ interface Article {
   type: number
   description: string
   image: string
+  create_time: string
 }
 interface Todo {
   id: string

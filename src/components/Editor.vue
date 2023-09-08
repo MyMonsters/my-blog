@@ -57,7 +57,6 @@ const article_id: Ref<number | undefined> = ref(props.article_id)
 const fileList: any = ref<UploadProps['fileList']>([])
 
 const infoStore = useInfoStore()
-
 const comment = ref({
   content: '',
   website: '',

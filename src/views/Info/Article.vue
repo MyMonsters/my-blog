@@ -22,7 +22,8 @@ const articleList: any = computed(() => infoStore.articles)
   margin: 10px;
   width: 70%;
   padding: 0 2%;
-  height: 100%;
+  height: fit-content;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
