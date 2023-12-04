@@ -9,7 +9,7 @@ import { getArticleByLabelName } from '@/api/info/api'
 import card from '@/base-ui/card'
 const route = useRoute()
 const label_name = route.params.label_name // import Content from '@/components/Content.vue'
-const articleList = reactive({ list: {} })
+const articleList = reactive({ list: [] })
 getArticleByLabelName(label_name).then((res) => {
   articleList.list = res.data
   console.log(articleList.list)

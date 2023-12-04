@@ -52,7 +52,6 @@ declare module '@vue/runtime-core' {
     ATypographyParagraph: typeof import('ant-design-vue/es')['TypographyParagraph']
     ATypographyText: typeof import('ant-design-vue/es')['TypographyText']
     AUpload: typeof import('ant-design-vue/es')['Upload']
-    Card: typeof import('./src/components/card/card.vue')['default']
     Editor: typeof import('./src/components/Editor.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

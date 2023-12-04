@@ -13,7 +13,7 @@ import { message } from 'ant-design-vue'
 const Route = useRoute()
 const uuid: string = Route.params.uuid as string
 console.log(uuid)
-const code = ref<string>()
+const code = ref<string>('')
 const handleVerify = () => {
   if (!code.value) {
     message.error('code值不为空！')
