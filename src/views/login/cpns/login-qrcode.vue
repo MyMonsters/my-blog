@@ -34,7 +34,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const url = ref()
 const uuid = ref(uuidv4())
-let timer
+let timer: any
 const AuthStore = useAuthStore()
 // const formRef = ref()
 // const loginAction = (isKeepPassword: boolean) => {
