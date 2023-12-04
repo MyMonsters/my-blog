@@ -5,9 +5,23 @@ import localCache from '@/utils/cache'
 // const authStore = useAuthStore()
 
 //操作article
+//登录
 export function accountLoginAPI(account: Account): Promise<LoginAPIRes> {
   return request.post('/log/login', qs.stringify(account))
 }
+//获取登录二维码
+export function getQrcodeImgAPI(uuid: string): Promise<QrcodeImgAPIRes> {
+  return request.get('/log/getQrcodeImg/' + uuid)
+}
+//验证登录码
+export function verifyQrcodeAPI(uuid: string, code: string): Promise<QrcodeVerifyAPIRes> {
+  return request.post('/log/verifyQrcode/' + uuid, qs.stringify({ code: code }))
+}
+//查看二维码登录状态
+export function checkQrcodeStatusAPI(uuid: string): Promise<QrcodeCheckAPIRes> {
+  return request.get('/log/checkQrcodeStatus/' + uuid)
+}
+//删除文章
 export function removeArticle(id: string): Promise<RemoveArticleRes> {
   const token = localCache.getCache('token')
   return request.post('/auth/removeArticle', qs.stringify({ id: id }), {

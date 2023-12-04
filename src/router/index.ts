@@ -98,6 +98,12 @@ const routes: RouteRecordRaw[] = [
     component: login
   },
   {
+    path: '/verify/:uuid',
+    component: () => {
+      return import('../views/verify/index.vue')
+    }
+  },
+  {
     path: '/authMain',
     component: () => {
       return import('@/views/Manage/AuthMain.vue')

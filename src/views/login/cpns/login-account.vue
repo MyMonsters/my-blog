@@ -49,6 +49,7 @@ const account = reactive({
 const authStore = useAuthStore()
 const { validate } = useForm(account, rules)
 const formRef = ref()
+
 const loginAction = (isKeepPassword: boolean) => {
   console.log('正在进行登录')
   validate().then(() => {

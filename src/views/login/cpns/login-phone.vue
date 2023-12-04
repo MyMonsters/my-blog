@@ -1,5 +1,5 @@
 <template>
-  <div class="login-account">
+  <div class="login-account" id="login_container">
     <a-form :rules="rules" :model="phone" ref="formRef">
       <a-form-item label="手机号：" prop="number">
         <a-input v-model="phone.number" />
@@ -23,6 +23,7 @@ const phone = reactive({
   number: '',
   verifycode: ''
 })
+
 const rules = {
   number: [
     { required: true, message: '手机号是必传内容', trigger: 'blur' },

@@ -46,3 +46,13 @@ interface About {
   intro: string
   theme: string
 }
+interface QrcodeImgAPIRes {
+  url: string
+}
+interface QrcodeVerifyAPIRes {
+  msg: string
+}
+interface QrcodeCheckAPIRes {
+  status: string
+  token?: string
+}

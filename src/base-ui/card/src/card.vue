@@ -84,7 +84,7 @@ list.map((item) => {
   }
 })
 console.log(listByYear)
-const activeKey = ref(['2023'])
+const activeKey = ref([2023])
 const customStyle =
   'background: transparent;border-radius: 4px;margin-bottom: 24px;border: 0;overflow: hidden'
 </script>
