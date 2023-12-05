@@ -36,7 +36,7 @@ const timeline: any = computed(() => infoStore.timeline)
 .ant-timeline-item-tail {
   display: block;
   border-left: 2px dashed rgb(157, 157, 161);
-  height: calc(100%-1px);
+  height: calc(100% - 1px);
 }
 .ant-timeline-item-label {
   font-size: 20px;
